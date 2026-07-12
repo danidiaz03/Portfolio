@@ -30,9 +30,99 @@
 <body>
   <div class="page">
 
+    <!-- Cursor personalizado (solo pointer:fine) -->
+    <div class="cursor" data-cursor aria-hidden="true"></div>
+
     <!-- ============ NAV ============ -->
+    <nav class="nav" data-nav>
+      <a class="nav__brand" href="#top">Daniel Díaz<span class="text-blue">.</span></a>
+
+      <div class="nav__links" data-nav-links>
+        <a class="roll" href="#manifiesto" data-rollwrap><span class="roll__inner" data-roll><span>Manifiesto</span><span>Manifiesto</span></span></a>
+        <a class="roll" href="#trayectoria" data-rollwrap><span class="roll__inner" data-roll><span>Trayectoria</span><span>Trayectoria</span></span></a>
+        <a class="roll" href="#proyectos" data-rollwrap><span class="roll__inner" data-roll><span>Proyectos</span><span>Proyectos</span></span></a>
+        <a class="roll" href="#stack" data-rollwrap><span class="roll__inner" data-roll><span>Stack</span><span>Stack</span></span></a>
+      </div>
+
+      <div class="nav__actions">
+        <button class="lang" type="button" data-lang aria-label="Cambiar idioma / Switch language">
+          <span data-lang-es>ES</span><span class="lang__sep">/</span><span data-lang-en>EN</span>
+        </button>
+        <span class="nav__clock" data-clock>MAD --:--</span>
+        <a class="btn btn--dark" href="#hablamos" data-nav-cta data-magnet>Hablamos →</a>
+        <button class="burger" type="button" data-burger aria-label="Abrir menú">
+          <span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Overlay menú móvil -->
+    <div class="menu" data-menu data-open="false">
+      <button class="menu__close" type="button" data-menu-close aria-label="Cerrar menú">✕</button>
+      <a class="menu__link" href="#manifiesto" data-menu-link>Manifiesto</a>
+      <a class="menu__link" href="#trayectoria" data-menu-link>Trayectoria</a>
+      <a class="menu__link" href="#proyectos" data-menu-link>Proyectos</a>
+      <a class="menu__link" href="#stack" data-menu-link>Stack</a>
+      <a class="menu__link menu__link--accent" href="#hablamos" data-menu-link>Hablamos →</a>
+    </div>
+
     <!-- ============ HERO ============ -->
+    <header class="hero" id="top">
+      <div class="hero__left" data-hero-left>
+        <div class="hero__tag" data-hero-item>
+          <span>Desarrollador Full Stack</span><span class="text-blue">/</span><span>Madrid</span>
+        </div>
+        <div>
+          <h1 class="hero__name" aria-label="Daniel Díaz">
+            <span class="hero__mask" data-line-mask><span class="hero__line" data-hero-line>Daniel</span></span>
+            <span class="hero__mask" data-line-mask><span class="hero__line" data-hero-line><span class="text-blue">Díaz</span><span class="text-ink">.</span></span></span>
+          </h1>
+          <p class="hero__tagline" data-hero-item>Construyo. Migro. Aseguro. Automatizo.</p>
+        </div>
+        <div class="hero__foot" data-hero-item>
+          <span class="status"><span class="status__dot"></span>Disponible para proyectos</span>
+          <span class="scroll-ind"><span class="scroll-ind__bar" data-scrollcue></span>Scroll</span>
+        </div>
+      </div>
+
+      <div class="hero__right" data-hero-item>
+        <div class="hero__kicker">Lo que hago</div>
+        <p class="hero__phrase" data-typewriter>Construyo tiendas que <span class="text-ink">no se caen</span>, migro servidores sin drama y automatizo lo aburrido.</p>
+        <div>
+          <div class="hero__meta">
+            <div><span class="hero__meta-label">Rol</span><span class="hero__meta-value">Full Stack</span></div>
+            <div><span class="hero__meta-label">Modalidad</span><span class="hero__meta-value">Remoto / híbrido</span></div>
+            <div><span class="hero__meta-label">Formación</span><span class="hero__meta-value">Grado Superior DAW</span></div>
+            <div><span class="hero__meta-label">Idiomas</span><span class="hero__meta-value">ES · EN</span></div>
+          </div>
+          <div class="hero__cta">
+            <a class="btn btn--cream" href="#proyectos" data-magnet>Ver proyectos ↓</a>
+            <a class="btn btn--ghost-cream" href="#hablamos" data-magnet>Contactar</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
     <!-- ============ MARQUEE ============ -->
+    <div class="marquee">
+      <div class="marquee__track marquee__track--main" data-marquee-track>
+        <span class="marquee__row">
+          <span>PHP</span><span class="text-blue">•</span><span class="marquee__stroke">Symfony</span><span class="text-blue">•</span><span>PrestaShop</span><span class="text-blue">•</span><span class="marquee__stroke">Cloudflare</span><span class="text-blue">•</span><span>Python</span><span class="text-blue">•</span><span class="marquee__stroke">Java</span><span class="text-blue">•</span><span>Nginx</span><span class="text-blue">•</span><span class="marquee__stroke">.NET</span><span class="text-blue">•</span><span>Angular</span><span class="text-blue">•</span>
+        </span>
+        <span class="marquee__row" aria-hidden="true">
+          <span>PHP</span><span class="text-blue">•</span><span class="marquee__stroke">Symfony</span><span class="text-blue">•</span><span>PrestaShop</span><span class="text-blue">•</span><span class="marquee__stroke">Cloudflare</span><span class="text-blue">•</span><span>Python</span><span class="text-blue">•</span><span class="marquee__stroke">Java</span><span class="text-blue">•</span><span>Nginx</span><span class="text-blue">•</span><span class="marquee__stroke">.NET</span><span class="text-blue">•</span><span>Angular</span><span class="text-blue">•</span>
+        </span>
+      </div>
+      <div class="marquee__track marquee__track--sub" data-marquee-track>
+        <span class="marquee__row marquee__row--sub">
+          <span>Desarrollo full stack</span><span class="text-blue">✦</span><span>Backend &amp; APIs</span><span class="text-blue">✦</span><span>Frontend</span><span class="text-blue">✦</span><span>Infraestructura &amp; seguridad</span><span class="text-blue">✦</span><span>Automatización</span><span class="text-blue">✦</span>
+        </span>
+        <span class="marquee__row marquee__row--sub" aria-hidden="true">
+          <span>Desarrollo full stack</span><span class="text-blue">✦</span><span>Backend &amp; APIs</span><span class="text-blue">✦</span><span>Frontend</span><span class="text-blue">✦</span><span>Infraestructura &amp; seguridad</span><span class="text-blue">✦</span><span>Automatización</span><span class="text-blue">✦</span>
+        </span>
+      </div>
+    </div>
+
     <!-- ============ 01 MANIFIESTO ============ -->
     <!-- ============ 02 TRAYECTORIA ============ -->
     <!-- ============ 03 PROYECTOS ============ -->
