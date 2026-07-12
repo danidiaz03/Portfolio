@@ -465,7 +465,8 @@
   box-shadow: 5px 6px 0 var(--blue);
   border-color: var(--blue);
 }
-.tile img {
+.tile img,
+.tile svg {
   width: clamp(34px, 5vw, 44px);
   height: clamp(34px, 5vw, 44px);
   object-fit: contain;
