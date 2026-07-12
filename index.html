@@ -27,6 +27,23 @@
   <link rel="stylesheet" href="assets/css/components.css">
 
   <noscript><style>[data-reveal]{opacity:1!important;transform:none!important;}</style></noscript>
+
+  <!-- Google Analytics 4 (Consent Mode v2) — sustituye G-XXXXXXXXXX por tu Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    // Por defecto sin almacenamiento hasta que el usuario acepte (RGPD)
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      wait_for_update: 500
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', { anonymize_ip: true });
+  </script>
 </head>
 <body>
   <div class="page">
@@ -340,6 +357,15 @@
         </button>
       </div>
     </footer>
+
+    <!-- Banner de consentimiento de cookies (RGPD) -->
+    <div class="consent" data-consent data-open="false" role="dialog" aria-label="Consentimiento de cookies" aria-live="polite">
+      <p class="consent__text">Uso cookies de analítica (Google Analytics) para entender cómo se navega el sitio. ¿Las aceptas?</p>
+      <div class="consent__actions">
+        <button class="btn btn--ghost-ink" type="button" data-consent-reject>Rechazar</button>
+        <button class="btn btn--dark" type="button" data-consent-accept>Aceptar</button>
+      </div>
+    </div>
 
   </div>
 

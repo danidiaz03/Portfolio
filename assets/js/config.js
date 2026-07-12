@@ -75,7 +75,12 @@ export const TRANSLATIONS = {
   'proyecto': 'project',
 
   // Footer
-  'Volver arriba': 'Back to top'
+  'Volver arriba': 'Back to top',
+
+  // Consentimiento de cookies
+  'Uso cookies de analítica (Google Analytics) para entender cómo se navega el sitio. ¿Las aceptas?': 'I use analytics cookies (Google Analytics) to understand how the site is used. Do you accept?',
+  'Rechazar': 'Decline',
+  'Aceptar': 'Accept'
 };
 
 // La frase del hero se teclea sola, así que se guarda su HTML por idioma.

@@ -1,6 +1,7 @@
 import { initUI } from './ui.js';
 import { initI18n } from './i18n.js';
 import { initProjects } from './projects.js';
+import { initConsent } from './consent.js';
 import { initAnimations } from './animations.js';
 
 const root = document.querySelector('.page');
@@ -11,6 +12,7 @@ function start() {
   initUI(root, reduce);
   initI18n(root, reduce);
   initProjects(root);
+  initConsent(root);
   initAnimations(root, reduce);
 }
 
