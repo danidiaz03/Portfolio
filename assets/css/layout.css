@@ -274,3 +274,32 @@
   font-size: .98rem;
   color: var(--on-dark);
 }
+
+/* ============ 03 PROYECTOS ============ */
+.projects {
+  position: relative;
+  overflow: hidden;
+}
+.projects__head {
+  padding-top: clamp(80px, 12vw, 140px);
+  padding-bottom: 20px;
+}
+.projects__title {
+  margin-top: 20px;
+  font-weight: 800;
+  font-size: clamp(2rem, 5.5vw, 4.2rem);
+  letter-spacing: -.03em;
+  text-transform: uppercase;
+}
+.projects__hint {
+  margin-top: 14px;
+  font-size: .9rem;
+  color: var(--text-muted);
+}
+.projects__track {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: clamp(16px, 2.5vw, 28px);
+  padding: 36px var(--gutter) clamp(80px, 10vw, 120px);
+}
