@@ -455,6 +455,67 @@
 }
 .modal__site { display: none; }
 
+/* ============ Mosaicos de stack ============ */
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: clamp(14px, 2vw, 22px) 10px;
+  background: var(--cream-panel);
+  border: 1.5px solid var(--ink);
+  border-radius: 14px;
+  transition: transform .3s, box-shadow .3s, border-color .3s;
+}
+.tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 5px 6px 0 var(--blue);
+  border-color: var(--blue);
+}
+.tile img {
+  width: clamp(34px, 5vw, 44px);
+  height: clamp(34px, 5vw, 44px);
+  object-fit: contain;
+}
+.tile span {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+/* ============ Roll en contacto (sobre azul) ============ */
+.roll--contact {
+  color: var(--cream);
+}
+.roll--contact .roll__inner > span:last-child {
+  color: var(--ink);
+}
+
+/* ============ Botón volver arriba ============ */
+.totop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  overflow: hidden;
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--cream);
+  background: transparent;
+  border: 2px solid rgba(241, 237, 228, .4);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background .3s, border-color .3s, color .3s;
+}
+.totop:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--cream);
+}
+.totop span { display: block; }
+
 /* ============ Cursor personalizado ============ */
 .cursor {
   position: fixed;

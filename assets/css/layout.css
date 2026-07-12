@@ -303,3 +303,136 @@
   gap: clamp(16px, 2.5vw, 28px);
   padding: 36px var(--gutter) clamp(80px, 10vw, 120px);
 }
+
+/* ============ 04 STACK ============ */
+.stack {
+  padding-top: clamp(80px, 12vw, 150px);
+  padding-bottom: clamp(80px, 12vw, 150px);
+}
+.stack__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 44px;
+}
+.stack__eyebrow { margin-bottom: 14px; }
+.stack__title {
+  font-weight: 800;
+  font-size: clamp(2rem, 5.5vw, 4.2rem);
+  line-height: .95;
+  letter-spacing: -.03em;
+  text-transform: uppercase;
+}
+.stack__intro {
+  max-width: 34ch;
+  font-size: .9rem;
+  color: var(--text-muted);
+}
+.stack__cats {
+  display: grid;
+  gap: clamp(28px, 4vw, 48px);
+}
+.stack__cat {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(16px, 3vw, 40px);
+  padding-top: clamp(20px, 2.5vw, 28px);
+  border-top: 2px solid var(--ink);
+}
+.stack__cat-head {
+  flex: 0 0 clamp(160px, 22vw, 260px);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.stack__cat-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--blue);
+}
+.stack__cat-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+}
+.stack__grid {
+  flex: 1 1 320px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(96px, 13vw, 124px), 1fr));
+  gap: clamp(8px, 1.2vw, 14px);
+}
+
+/* ============ 05 CONTACTO ============ */
+.contact {
+  overflow: hidden;
+  background: var(--blue);
+  color: var(--cream);
+  padding: clamp(90px, 13vw, 170px) 0 clamp(90px, 13vw, 150px);
+}
+.contact__inner { text-align: center; }
+.contact__eyebrow {
+  color: var(--cream);
+  margin-bottom: 26px;
+}
+.contact__title {
+  margin: 0 0 40px;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 9vw, 7.5rem);
+  line-height: .92;
+  letter-spacing: -.03em;
+  text-transform: uppercase;
+}
+.contact__email {
+  display: inline-block;
+  padding: 20px 42px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1rem, 2.2vw, 1.4rem);
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--cream);
+  border-radius: 999px;
+  transition: background .3s, color .3s;
+}
+.contact__email:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+.contact__socials {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px 36px;
+  margin-top: 44px;
+  font-size: .95rem;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 26px var(--gutter);
+  background: var(--ink);
+  color: var(--text-faint);
+  font-size: .82rem;
+}
+.footer__right {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+.footer__label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
