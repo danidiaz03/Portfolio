@@ -278,7 +278,6 @@
 /* ============ 03 PROYECTOS ============ */
 .projects {
   position: relative;
-  overflow: hidden;
 }
 .projects__head {
   padding-top: clamp(80px, 12vw, 140px);
@@ -296,38 +295,29 @@
   font-size: .9rem;
   color: var(--text-muted);
 }
+
+/* Las tarjetas se apilan y se superponen al hacer scroll (sticky stack) */
 .projects__track {
   display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  gap: clamp(16px, 2.5vw, 28px);
-  padding: 36px var(--gutter) clamp(80px, 10vw, 120px);
+  flex-direction: column;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 28px var(--gutter) clamp(90px, 12vw, 160px);
 }
-
-/* Móvil: las tarjetas se apilan y se superponen al hacer scroll (sticky stack) */
-@media (max-width: 899px) {
-  .projects { overflow: visible; }
-  .projects__track {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    gap: 0;
-    padding-top: 24px;
-  }
-  .card {
-    width: 100%;
-    max-width: none;
-    position: sticky;
-    margin-bottom: clamp(20px, 5vw, 32px);
-  }
-  .card:nth-child(1) { top: 90px; }
-  .card:nth-child(2) { top: 106px; }
-  .card:nth-child(3) { top: 122px; }
-  .card:nth-child(4) { top: 138px; }
-  .card:last-child { margin-bottom: 0; }
+.projects .card {
+  width: 100%;
+  max-width: none;
+  position: sticky;
+  margin-bottom: clamp(22px, 4vw, 40px);
 }
+.projects .card:nth-child(1) { top: clamp(90px, 12vh, 120px); }
+.projects .card:nth-child(2) { top: calc(clamp(90px, 12vh, 120px) + 16px); }
+.projects .card:nth-child(3) { top: calc(clamp(90px, 12vh, 120px) + 32px); }
+.projects .card:nth-child(4) { top: calc(clamp(90px, 12vh, 120px) + 48px); }
+.projects .card:last-child { margin-bottom: 0; }
 
 @media (prefers-reduced-motion: reduce) {
-  .card { position: static; }
+  .projects .card { position: static; }
 }
 
 /* ============ 04 STACK ============ */

@@ -17,7 +17,6 @@ export function initAnimations(root, reduce) {
   gsap.registerPlugin(ScrollTrigger);
 
   const isTouch = !window.matchMedia('(pointer: fine)').matches;
-  const wide = window.matchMedia('(min-width: 900px)').matches;
   const q = (sel) => Array.from(root.querySelectorAll(sel));
 
   heroIntro(gsap, q, root);
@@ -27,14 +26,11 @@ export function initAnimations(root, reduce) {
   marqueeSkew(gsap, ScrollTrigger, root, q);
   counters(gsap, ScrollTrigger, q);
   stackTiles(gsap, q);
-  if (wide) horizontalProjects(gsap, ScrollTrigger, root);
-  else hideHint(root);
 
   if (isTouch) return; // los hovers de ratón no aplican en táctil
 
   reactiveName(gsap, root);
   expRowHover(gsap, q);
-  cardTilt(gsap, q);
   magnetic(gsap, q);
   cursor(gsap, root);
 }
@@ -117,34 +113,6 @@ function stackTiles(gsap, q) {
   });
 }
 
-function horizontalProjects(gsap, ScrollTrigger, root) {
-  const wrap = root.querySelector('[data-hwrap]');
-  const track = root.querySelector('[data-htrack]');
-  const hint = root.querySelector('[data-hhint]');
-  if (!wrap || !track) return;
-
-  track.style.flexWrap = 'nowrap';
-  track.style.width = 'max-content';
-  const dist = () => Math.max(0, track.scrollWidth - window.innerWidth + 48);
-
-  if (dist() > 60) {
-    gsap.to(track, {
-      x: () => -dist(),
-      ease: 'none',
-      scrollTrigger: { trigger: wrap, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true }
-    });
-  } else {
-    track.style.flexWrap = 'wrap';
-    track.style.width = '';
-    if (hint) hint.style.display = 'none';
-  }
-}
-
-function hideHint(root) {
-  const hint = root.querySelector('[data-hhint]');
-  if (hint) hint.style.display = 'none';
-}
-
 function reactiveName(gsap, root) {
   const left = root.querySelector('[data-hero-left]');
   const lines = Array.from(root.querySelectorAll('#top [data-hero-line]'));
@@ -187,23 +155,6 @@ function expRowHover(gsap, q) {
   q('[data-exp-row]').forEach(row => {
     row.addEventListener('mouseenter', () => gsap.to(row, { x: 14, duration: 0.4, ease: 'power3.out' }));
     row.addEventListener('mouseleave', () => gsap.to(row, { x: 0, duration: 0.4, ease: 'power3.out' }));
-  });
-}
-
-function cardTilt(gsap, q) {
-  q('[data-card]').forEach(card => {
-    const arrow = card.querySelector('[data-arrow]');
-    card.addEventListener('mousemove', (e) => {
-      const r = card.getBoundingClientRect();
-      const dx = (e.clientX - r.left) / r.width - 0.5;
-      const dy = (e.clientY - r.top) / r.height - 0.5;
-      gsap.to(card, { rotationY: dx * 7, rotationX: -dy * 7, y: -8, transformPerspective: 900, duration: 0.5, ease: 'power2.out' });
-    });
-    card.addEventListener('mouseenter', () => { if (arrow) gsap.to(arrow, { x: 5, y: -5, duration: 0.4, ease: 'power3.out' }); });
-    card.addEventListener('mouseleave', () => {
-      gsap.to(card, { rotationY: 0, rotationX: 0, y: 0, duration: 0.6, ease: 'power3.out' });
-      if (arrow) gsap.to(arrow, { x: 0, y: 0, duration: 0.4, ease: 'power3.out' });
-    });
   });
 }
 

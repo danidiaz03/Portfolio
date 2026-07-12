@@ -325,6 +325,10 @@
 .card__arrow {
   display: inline-block;
   font-size: 1.4rem;
+  transition: transform .35s var(--ease-out);
+}
+.card:hover .card__arrow {
+  transform: translate(4px, -4px);
 }
 .card__title {
   margin: 34px 0 12px;

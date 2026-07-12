@@ -48,7 +48,7 @@ export const TRANSLATIONS = {
   // Proyectos
   '03 / Proyectos': '03 / Projects',
   'Cosas que existen': 'Things that exist',
-  'Desliza — la sección scrollea en horizontal →': 'Swipe — this section scrolls horizontally →',
+  'Pulsa una tarjeta para ver los detalles.': 'Tap a card to see the details.',
   'Ver detalles ↗': 'View details ↗',
   'Aplicación de gestión para una clínica veterinaria: pacientes, citas e historial clínico.': 'Management app for a veterinary clinic: patients, appointments and medical history.',
   'Aplicación de escaneo con frontend en Angular y API en Symfony.': 'Scanning app with an Angular frontend and a Symfony API.',
