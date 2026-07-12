@@ -154,7 +154,7 @@ function reactiveName(gsap, root) {
   lines.forEach(line => {
     const frag = document.createDocumentFragment();
     Array.from(line.childNodes).forEach(node => {
-      const color = node.nodeType === Node.TEXT_NODE ? null : (node.style && node.style.color) || null;
+      const color = node.nodeType === Node.TEXT_NODE ? null : getComputedStyle(node).color;
       for (const ch of node.textContent) {
         const s = document.createElement('span');
         s.textContent = ch;
