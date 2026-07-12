@@ -26,6 +26,12 @@ export function initAnimations(root, reduce) {
   marqueeSkew(gsap, ScrollTrigger, root, q);
   counters(gsap, ScrollTrigger, q);
   stackTiles(gsap, q);
+  horizontalProjects(gsap, ScrollTrigger, root);
+
+  // Recalcular medidas cuando las fuentes cargan (evita distancias mal medidas)
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => ScrollTrigger.refresh());
+  }
 
   if (isTouch) return; // los hovers de ratón no aplican en táctil
 
@@ -110,6 +116,38 @@ function stackTiles(gsap, q) {
       y: 20, opacity: 0, scale: 0.94, duration: 0.55, stagger: 0.05, ease: 'power3.out',
       scrollTrigger: { trigger: cat, start: 'top 85%', once: true }
     });
+  });
+}
+
+// Escritorio (>=900px): el track de proyectos se desplaza en horizontal
+// mientras la seccion queda fijada. gsap.matchMedia crea y destruye el
+// efecto de forma limpia al cruzar el breakpoint (en movil manda el CSS sticky).
+function horizontalProjects(gsap, ScrollTrigger, root) {
+  const section = root.querySelector('.projects');
+  const scroller = root.querySelector('.projects__scroller');
+  const track = root.querySelector('.projects__track');
+  if (!section || !scroller || !track) return;
+
+  const mm = gsap.matchMedia();
+  mm.add('(min-width: 900px)', () => {
+    const amount = () => Math.max(0, track.scrollWidth - scroller.clientWidth);
+    if (amount() <= 10) return;
+
+    const tween = gsap.to(track, {
+      x: () => -amount(),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: () => '+=' + amount(),
+        pin: true,
+        scrub: 1,
+        anticipatePin: 1,
+        invalidateOnRefresh: true
+      }
+    });
+
+    return () => tween.kill();
   });
 }
 

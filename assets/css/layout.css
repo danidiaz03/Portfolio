@@ -320,6 +320,45 @@
   .projects .card { position: static; }
 }
 
+/* Escritorio: las tarjetas se deslizan en horizontal con el scroll (GSAP las anima) */
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .projects {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .projects__head {
+    flex: none;
+    padding-top: clamp(70px, 10vh, 110px);
+    padding-bottom: 0;
+  }
+  .projects__scroller {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .projects__track {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: max-content;
+    max-width: none;
+    margin: 0;
+    gap: clamp(20px, 2.5vw, 36px);
+    padding: 0 var(--gutter);
+  }
+  .projects .card {
+    position: static;
+    flex: 0 0 auto;
+    width: clamp(340px, 34vw, 460px);
+    min-height: min(420px, 62vh);
+    max-width: none;
+    margin-bottom: 0;
+  }
+}
+
 /* ============ 04 STACK ============ */
 .stack {
   padding-top: clamp(80px, 12vw, 150px);
