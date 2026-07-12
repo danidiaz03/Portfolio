@@ -304,6 +304,32 @@
   padding: 36px var(--gutter) clamp(80px, 10vw, 120px);
 }
 
+/* Móvil: las tarjetas se apilan y se superponen al hacer scroll (sticky stack) */
+@media (max-width: 899px) {
+  .projects { overflow: visible; }
+  .projects__track {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 0;
+    padding-top: 24px;
+  }
+  .card {
+    width: 100%;
+    max-width: none;
+    position: sticky;
+    margin-bottom: clamp(20px, 5vw, 32px);
+  }
+  .card:nth-child(1) { top: 90px; }
+  .card:nth-child(2) { top: 106px; }
+  .card:nth-child(3) { top: 122px; }
+  .card:nth-child(4) { top: 138px; }
+  .card:last-child { margin-bottom: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { position: static; }
+}
+
 /* ============ 04 STACK ============ */
 .stack {
   padding-top: clamp(80px, 12vw, 150px);
