@@ -50,15 +50,14 @@
         </button>
         <span class="nav__clock" data-clock>MAD --:--</span>
         <a class="btn btn--dark" href="#hablamos" data-nav-cta data-magnet>Hablamos →</a>
-        <button class="burger" type="button" data-burger aria-label="Abrir menú">
+        <button class="burger" type="button" data-burger aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
           <span></span><span></span>
         </button>
       </div>
     </nav>
 
     <!-- Overlay menú móvil -->
-    <div class="menu" data-menu data-open="false">
-      <button class="menu__close" type="button" data-menu-close aria-label="Cerrar menú">✕</button>
+    <div class="menu" id="mobile-menu" data-menu data-open="false">
       <a class="menu__link" href="#manifiesto" data-menu-link>Manifiesto</a>
       <a class="menu__link" href="#trayectoria" data-menu-link>Trayectoria</a>
       <a class="menu__link" href="#proyectos" data-menu-link>Proyectos</a>
