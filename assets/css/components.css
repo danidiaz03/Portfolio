@@ -250,6 +250,35 @@
   -webkit-text-stroke: 1px var(--cream);
 }
 
+/* ============ Caja de estadísticas (manifiesto) ============ */
+.stats {
+  flex: 1 1 280px;
+  display: grid;
+  overflow: hidden;
+  background: var(--cream-panel);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+}
+.stats__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  padding: 18px 22px;
+  border-bottom: 2px solid var(--ink);
+}
+.stats__row:last-child { border-bottom: none; }
+.stats__num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2rem;
+}
+.stats__label {
+  font-size: .82rem;
+  text-align: right;
+  color: var(--text-muted);
+}
+
 /* ============ Cursor personalizado ============ */
 .cursor {
   position: fixed;
