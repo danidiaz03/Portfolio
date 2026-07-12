@@ -353,7 +353,7 @@
     position: static;
     flex: 0 0 auto;
     width: clamp(340px, 34vw, 460px);
-    min-height: min(420px, 62vh);
+    min-height: min(370px, 62vh);
     max-width: none;
     margin-bottom: 0;
   }
