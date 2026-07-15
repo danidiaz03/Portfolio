@@ -50,6 +50,8 @@ export const TRANSLATIONS = {
   'Cosas que existen': 'Things that exist',
   'Pulsa una tarjeta para ver los detalles.': 'Tap a card to see the details.',
   'Ver detalles ↗': 'View details ↗',
+  'En vivo': 'Live',
+  'Próximamente': 'Coming soon',
   'Aplicación de gestión para una clínica veterinaria: pacientes, citas e historial clínico.': 'Management app for a veterinary clinic: patients, appointments and medical history.',
   'Aplicación de escaneo con frontend en Angular y API en Symfony.': 'Scanning app with an Angular frontend and a Symfony API.',
   'Gestión de finanzas personales: ingresos, gastos y balances en tiempo real.': 'Personal finance management: income, expenses and balances in real time.',
@@ -59,6 +61,7 @@ export const TRANSLATIONS = {
   'Proyecto': 'Project',
   'Ver repositorio ↗': 'View repository ↗',
   'Ver sitio ↗': 'View site ↗',
+  'Ver el caso ↗': 'Read the case study ↗',
 
   // Stack
   '04 / Stack': '04 / Stack',

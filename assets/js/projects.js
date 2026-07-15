@@ -5,11 +5,20 @@ export function initProjects(root) {
   const modal = root.querySelector('[data-proj-modal]');
   if (!modal) return;
 
-  const panel = modal.querySelector('[data-proj-panel]');
   const titleEl = modal.querySelector('[data-proj-title]');
   const descEl = modal.querySelector('[data-proj-desc]');
-  const repoEl = modal.querySelector('[data-proj-repo]');
-  const siteEl = modal.querySelector('[data-proj-site]');
+  const soonEl = modal.querySelector('[data-proj-soon]');
+  const links = {
+    post: modal.querySelector('[data-proj-post]'),
+    site: modal.querySelector('[data-proj-site]'),
+    repo: modal.querySelector('[data-proj-repo]')
+  };
+
+  const setLink = (el, url, show) => {
+    if (!el) return;
+    if (show && url) { el.href = url; el.style.display = 'inline-flex'; }
+    else el.style.display = 'none';
+  };
 
   const open = (card) => {
     const h3 = card.querySelector('h3');
@@ -17,15 +26,19 @@ export function initProjects(root) {
     if (titleEl) titleEl.textContent = h3 ? h3.textContent : '';
     if (descEl) descEl.textContent = p ? p.textContent : '';
 
-    const repo = card.getAttribute('data-repo') || '';
-    const site = card.getAttribute('data-site') || '';
-    if (repoEl) {
-      repoEl.href = repo;
-      repoEl.style.display = repo ? 'inline-flex' : 'none';
-    }
-    if (siteEl) {
-      siteEl.href = site;
-      siteEl.style.display = site ? 'inline-flex' : 'none';
+    const soon = card.hasAttribute('data-soon');
+    setLink(links.post, card.getAttribute('data-post'), !soon);
+    setLink(links.site, card.getAttribute('data-site'), !soon);
+    setLink(links.repo, card.getAttribute('data-repo'), !soon);
+
+    if (soonEl) {
+      if (soon) {
+        const date = card.getAttribute('data-date') || '';
+        soonEl.textContent = date ? 'Próximamente · ' + date : 'Próximamente';
+        soonEl.style.display = 'block';
+      } else {
+        soonEl.style.display = 'none';
+      }
     }
 
     modal.setAttribute('data-open', 'true');
