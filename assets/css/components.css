@@ -388,14 +388,8 @@
   border-radius: 50%;
   background: currentColor;
 }
-.card__badge--live {
-  opacity: 1;
-  color: var(--blue);
-  border-color: var(--blue);
-}
-.card__badge--live .card__badge-dot {
-  background: var(--blue);
-  box-shadow: 0 0 0 3px rgba(43, 75, 255, .2);
+.card__cd {
+  font-variant-numeric: tabular-nums;
 }
 .card--soon .card__num { opacity: .5; }
 

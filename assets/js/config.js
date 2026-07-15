@@ -50,7 +50,6 @@ export const TRANSLATIONS = {
   'Cosas que existen': 'Things that exist',
   'Pulsa una tarjeta para ver los detalles.': 'Tap a card to see the details.',
   'Ver detalles ↗': 'View details ↗',
-  'En vivo': 'Live',
   'Próximamente': 'Coming soon',
   'Aplicación de gestión para una clínica veterinaria: pacientes, citas e historial clínico.': 'Management app for a veterinary clinic: patients, appointments and medical history.',
   'Aplicación de escaneo con frontend en Angular y API en Symfony.': 'Scanning app with an Angular frontend and a Symfony API.',

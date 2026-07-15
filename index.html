@@ -242,37 +242,39 @@
 
       <div class="projects__scroller">
         <div class="projects__track">
-        <!-- 01 — PUBLICADO -->
+        <!-- 01 — PUBLICADO (Clínica Veterinaria) -->
         <a class="card card--cream" href="https://clinicaveterinaria.danieldiaz.es" data-proj
            data-repo="https://github.com/danidiaz03/Clinica-veterinaria" data-site="https://clinicaveterinaria.danieldiaz.es">
-          <div class="card__top"><span class="card__num text-blue">01</span><span class="card__badge card__badge--live"><span class="card__badge-dot"></span>En vivo</span></div>
+          <div class="card__top"><span class="card__num text-blue">01</span><span class="card__arrow" data-arrow>↗</span></div>
           <h3 class="card__title">Clínica Veterinaria</h3>
           <p class="card__desc">Aplicación de gestión para una clínica veterinaria: pacientes, citas e historial clínico.</p>
           <div class="card__foot"><span class="card__tech">.NET · C# · SQLite</span><span class="card__cta text-blue">Ver detalles ↗</span></div>
         </a>
 
-        <!-- 02 — PRÓXIMAMENTE (sin fecha). Al publicar: quita data-soon y añade data-repo / data-post -->
-        <a class="card card--ink card--soon" href="#proyectos" data-proj data-soon>
-          <div class="card__top"><span class="card__num" style="color:var(--on-dark-accent)">02</span><span class="card__badge"><span class="card__badge-dot"></span>Próximamente</span></div>
-          <h3 class="card__title">ScanPass</h3>
-          <p class="card__desc">Aplicación de escaneo con frontend en Angular y API en Symfony.</p>
-          <div class="card__foot"><span class="card__tech">Angular · Symfony · API REST</span><span class="card__cta" style="color:var(--on-dark-accent)">Ver detalles ↗</span></div>
+        <!-- 02 — PRÓXIMAMENTE con cuenta atrás (lunes 20 jul, 16:00 CEST).
+             Al publicar: quita data-soon, data-countdown y data-date; rellena data-post con el enlace al post del proyecto (y data-repo si aplica) -->
+        <a class="card card--ink card--soon" href="#proyectos" data-proj data-soon
+           data-date="Lunes 20 jul · 16:00" data-post="">
+          <div class="card__top"><span class="card__num" style="color:var(--on-dark-accent)">02</span><span class="card__badge"><span class="card__badge-dot"></span><span class="card__cd" data-countdown="2026-07-20T16:00:00+02:00" data-cd-done="¡Ya disponible!">Próximamente</span></span></div>
+          <h3 class="card__title">Dapokedex</h3>
+          <p class="card__desc">Pokédex interactiva construida con Angular y Firebase que consume la PokéAPI.</p>
+          <div class="card__foot"><span class="card__tech">Angular · Firebase · PokéAPI</span><span class="card__cta" style="color:var(--on-dark-accent)">Ver detalles ↗</span></div>
         </a>
 
         <!-- 03 — PRÓXIMAMENTE (sin fecha) -->
         <a class="card card--blue card--soon" href="#proyectos" data-proj data-soon>
           <div class="card__top"><span class="card__num text-cream">03</span><span class="card__badge"><span class="card__badge-dot"></span>Próximamente</span></div>
-          <h3 class="card__title text-cream">FinanceFlow</h3>
-          <p class="card__desc">Gestión de finanzas personales: ingresos, gastos y balances en tiempo real.</p>
-          <div class="card__foot"><span class="card__tech">Angular · Symfony · MySQL</span><span class="card__cta text-cream">Ver detalles ↗</span></div>
+          <h3 class="card__title text-cream">ScanPass</h3>
+          <p class="card__desc">Aplicación de escaneo con frontend en Angular y API en Symfony.</p>
+          <div class="card__foot"><span class="card__tech">Angular · Symfony · API REST</span><span class="card__cta text-cream">Ver detalles ↗</span></div>
         </a>
 
-        <!-- 04 — PRÓXIMAMENTE (lunes 20 jul, 16:00). Al publicar: quita data-soon, rellena data-post con el enlace al post del proyecto (y data-repo si aplica) -->
-        <a class="card card--cream card--soon" href="#proyectos" data-proj data-soon data-date="Lunes 20 jul · 16:00" data-post="">
+        <!-- 04 — PRÓXIMAMENTE (sin fecha) -->
+        <a class="card card--cream card--soon" href="#proyectos" data-proj data-soon>
           <div class="card__top"><span class="card__num text-blue">04</span><span class="card__badge"><span class="card__badge-dot"></span>Próximamente</span></div>
-          <h3 class="card__title">Dapokedex</h3>
-          <p class="card__desc">Pokédex interactiva construida con Angular y Firebase que consume la PokéAPI.</p>
-          <div class="card__foot"><span class="card__tech">Angular · Firebase · PokéAPI</span><span class="card__cta text-blue">Ver detalles ↗</span></div>
+          <h3 class="card__title">FinanceFlow</h3>
+          <p class="card__desc">Gestión de finanzas personales: ingresos, gastos y balances en tiempo real.</p>
+          <div class="card__foot"><span class="card__tech">Angular · Symfony · MySQL</span><span class="card__cta text-blue">Ver detalles ↗</span></div>
         </a>
         </div>
       </div>
