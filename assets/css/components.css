@@ -171,13 +171,6 @@
   font-size: clamp(.85rem, 1.3vw, 1rem);
   letter-spacing: -.01em;
 }
-.status__dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--blue);
-  box-shadow: 0 0 0 4px rgba(43, 75, 255, .2);
-}
 
 .scroll-ind {
   display: inline-flex;
