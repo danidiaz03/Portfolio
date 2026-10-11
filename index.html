@@ -1039,7 +1039,7 @@ class Component extends DCLogic {
       if (r && !this._reduce && !document.hidden) r.querySelectorAll('[data-pop]').forEach(el => this.play(el, 'hzoom', 0, 450));
     }
     if (ps.modal !== s.modal || ps.menu !== s.menu) document.body.style.overflow = (s.modal !== null && s.modal !== undefined) || s.menu ? 'hidden' : '';
-    if (ps.mobile !== s.mobile && s.pinned) this.killPin();
+    if (ps.mobile !== s.mobile && s.pinned && window.ScrollTrigger) requestAnimationFrame(() => { try { window.ScrollTrigger.refresh(); } catch (e) {} });
     if (this._skView) this._skView();
   }
 
@@ -1277,10 +1277,10 @@ class Component extends DCLogic {
     });
   }
 
-  // Escritorio: el carril horizontal se engancha al scroll de la página.
-  // Solo si la ventana scrollea de verdad; si no, queda el carril nativo con flechas.
+  // El carril horizontal se engancha al scroll de la página en todos los anchos.
+  // Solo si la ventana scrollea de verdad; si no (o con movimiento reducido), queda el carril nativo con flechas.
   async setupPin() {
-    if (this._reduce || this.state.mobile) return;
+    if (this._reduce) return;
     if (document.documentElement.scrollHeight <= window.innerHeight + 300) return;
     const load = (src) => new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
     try {
@@ -1289,20 +1289,23 @@ class Component extends DCLogic {
     } catch (e) { return; }
     const gsap = window.gsap, ST = window.ScrollTrigger;
     gsap.registerPlugin(ST);
+    // en móvil, que la barra del navegador al aparecer/ocultarse no recalcule todo
+    try { ST.config({ ignoreMobileResize: true }); } catch (e) {}
     const f0 = gsap.ticker.frame;
     await new Promise(r => setTimeout(r, 300));
     if (gsap.ticker.frame === f0) return;
     const sec = this.projRef.current, track = this.trackRef.current;
-    if (!sec || !track || this.state.mobile) return;
+    if (!sec || !track) return;
     track.scrollLeft = 0;
     track.style.overflowX = 'visible';
     track.style.scrollSnapType = 'none';
     sec.style.overflow = 'hidden';
-    const dist = () => Math.max(0, track.scrollWidth - window.innerWidth);
+    // el padding final del carril no cuenta en scrollWidth: se suma para que la última tarjeta no quede pegada al borde
+    const dist = () => Math.max(0, track.scrollWidth + (parseFloat(getComputedStyle(track).paddingRight) || 0) - window.innerWidth);
     if (dist() < 60) { this.killPin(); return; }
     const n = PROJ.length;
     this._pinTween = gsap.to(track, { x: () => -dist(), ease: 'none',
-      scrollTrigger: { trigger: sec, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 0.8, invalidateOnRefresh: true, anticipatePin: 1,
+      scrollTrigger: { trigger: sec, start: () => sec.offsetHeight > window.innerHeight ? 'bottom bottom' : 'top top', end: () => '+=' + dist(), pin: true, scrub: 0.8, invalidateOnRefresh: true, anticipatePin: 1,
         onUpdate: (s) => { const i = Math.round(s.progress * (n - 1)); if (i !== this.state.projIdx) this.setState({ projIdx: i }); } } });
     this.setState({ pinned: true });
     window.addEventListener('load', () => { try { ST.refresh(); } catch (e) {} });
