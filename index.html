@@ -144,6 +144,21 @@
   h2,h3{hyphens:auto;-webkit-hyphens:auto;text-wrap:balance;}
   img{max-width:100%;}
   @media (max-width:1024px){[data-nav-cta]{display:none !important;}}
+  /* Habilidades: al apilarse las columnas, la intro deja de ser sticky */
+  @media (max-width:980px){[data-sk-intro]{position:static !important;container-type:normal !important;}}
+  [data-sk-sheet]{transition:opacity .3s,transform .3s;}
+  [data-sk-sheet][data-inview="false"]{opacity:0;transform:translateY(24px);pointer-events:none;}
+  /* Columnas apiladas: el panel en línea es solo una pista; el detalle sale en la hoja inferior */
+  @media (max-width:980px){
+    [data-sk-panel]{min-height:0 !important;padding:16px 18px !important;margin-top:24px !important;}
+    [data-sk-sheet]{left:50% !important;right:auto !important;width:min(560px,calc(100vw - 24px));transform:translateX(-50%);}
+    [data-sk-sheet][data-inview="false"]{transform:translate(-50%,24px);}
+  }
+  @media (max-width:860px){
+    /* Proyectos: tarjetas más compactas en el carrusel */
+    [data-card]{min-height:340px !important;}
+    [data-card] h3{padding-top:40px !important;}
+  }
   @keyframes hrise{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
   @keyframes hfloat{from{transform:translateY(-12px) rotateY(-9deg) rotateX(4deg);}to{transform:translateY(12px) rotateY(9deg) rotateX(-4deg);}}
   @keyframes hmask{from{transform:translateY(105%);}to{transform:none;}}
@@ -388,9 +403,7 @@
         <h2 style="font-size:clamp(2.1rem,7vw,5rem);font-weight:700;letter-spacing:-.045em;line-height:1.02;margin:0;">{{ t.h2Exp }}</h2>
         <p style="margin:16px 0 0;font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.5;color:#6e6e73;max-width:44ch;">{{ t.expSub }}</p>
       </div>
-      <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
-        <button type="button" sc-camel-on-click="{{ clearSkill }}" style="display:inline-flex;align-items:center;gap:10px;border:none;background:#0071e3;color:#fff;border-radius:980px;padding:10px 18px;cursor:pointer;font-size:.88rem;font-weight:500;">{{ t.filtering }} {{ sel }} <span aria-hidden="true">✕</span></button>
-      </sc-if>
+      <button type="button" sc-camel-on-click="{{ clearSkill }}" aria-hidden="{{ selHidden }}" tabindex="{{ selTab }}" style="display:inline-flex;align-items:center;gap:10px;border:none;background:#0071e3;color:#fff;border-radius:980px;padding:10px 18px;cursor:pointer;font-size:.88rem;font-weight:500;visibility:{{ selVis }};">{{ t.filtering }} {{ sel }} <span aria-hidden="true">✕</span></button>
     </div>
     <div style="display:grid;">
       <sc-for list="{{ exp }}" as="e" hint-placeholder-count="3">
@@ -425,12 +438,12 @@
   <section id="habilidades" style="padding:0 0 clamp(0px,1vw,0px);">
     <div data-expand="" style="background:#000;color:#f5f5f7;padding:clamp(96px,12vw,160px) 0;transform-origin:center top;">
       <div style="max-width:1120px;margin:0 auto;padding:0 clamp(18px,4vw,40px);display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,88px);align-items:flex-start;">
-        <div data-reveal="" style="flex:1 1 300px;min-width:0;position:sticky;top:100px;container-type:inline-size;">
+        <div data-reveal="" data-sk-intro="" style="flex:1 1 300px;min-width:0;position:sticky;top:100px;container-type:inline-size;">
           <div style="font-size:1.05rem;font-weight:600;color:#2997ff;margin-bottom:14px;">{{ t.skKicker }}</div>
           <h2 style="font-size:clamp(2.1rem,14cqi,5rem);font-weight:700;letter-spacing:-.045em;line-height:1.02;margin:0;">{{ t.h2Sk }}</h2>
           <p style="margin:20px 0 0;line-height:1.55;color:#86868b;font-size:1.1rem;max-width:36ch;text-wrap:pretty;">{{ t.skIntro }}</p>
-          <div style="margin-top:34px;background:#1d1d1f;border-radius:24px;padding:24px;min-height:190px;">
-            <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
+          <div data-sk-panel="" style="margin-top:34px;background:#1d1d1f;border-radius:24px;padding:24px;min-height:190px;">
+            <sc-if value="{{ skPanelSel }}" hint-placeholder-val="{{ false }}">
               <div>
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
                   <span style="font-size:clamp(1.6rem,2.6vw,2.1rem);font-weight:700;letter-spacing:-.03em;">{{ sel }}</span>
@@ -444,7 +457,7 @@
                 </div>
               </div>
             </sc-if>
-            <sc-if value="{{ noSel }}" hint-placeholder-val="{{ true }}">
+            <sc-if value="{{ skPanelHint }}" hint-placeholder-val="{{ true }}">
               <p style="margin:0;font-size:.98rem;line-height:1.6;color:#86868b;">{{ t.pick }}</p>
             </sc-if>
           </div>
@@ -510,6 +523,23 @@
       </sc-for>
     </div>
   </section>
+
+  <sc-if value="{{ skSheet }}" hint-placeholder-val="{{ false }}">
+    <div data-sk-sheet="" role="region" aria-label="{{ t.usedIn }}" style="position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom,0px));z-index:250;max-height:55vh;overflow-y:auto;overscroll-behavior:contain;background:#1d1d1f;color:#f5f5f7;border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:20px 22px;box-shadow:0 30px 60px -20px rgba(0,0,0,.65);">
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                <span style="font-size:clamp(1.6rem,2.6vw,2.1rem);font-weight:700;letter-spacing:-.03em;">{{ sel }}</span>
+                <button type="button" sc-camel-on-click="{{ clearSkill }}" aria-label="Quitar filtro" style="width:34px;height:34px;border-radius:50%;border:none;background:#2c2c2e;color:#f5f5f7;cursor:pointer;">✕</button>
+              </div>
+              <div style="font-size:.82rem;font-weight:600;color:#86868b;margin:16px 0 6px;">{{ t.usedIn }}</div>
+              <div style="display:grid;">
+                <sc-for list="{{ selPlaces }}" as="p" hint-placeholder-count="2">
+                  <a href="{{ p.href }}" style="display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.08);color:#f5f5f7;text-decoration:none;font-size:.98rem;transition:color .3s;" style-hover="color:#2997ff"><span>{{ p.name }}</span><span style="font-size:.8rem;color:#86868b;">{{ p.kind }}</span></a>
+                </sc-for>
+              </div>
+            </div>
+    </div>
+  </sc-if>
 
   <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;padding:20px;">
@@ -696,6 +726,8 @@ const PROJ = [
 
 const DEV = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/';
 const ICON = (p) => (window.__resources || {})['dv_' + p.replace(/[^a-z0-9]/gi, '_')] || (DEV + p + '.svg');
+// Iconos oscuros que se pasan a blanco sobre los chips negros
+const DARK_ICONS = ['GitHub', 'Symfony', 'Django', 'WordPress', 'MySQL', 'SQL Server'];
 const SKILLS = [
   { name: { es: 'Lenguajes', en: 'Languages' }, items: [['PHP', 'php/php-original'], ['JavaScript', 'javascript/javascript-original'], ['Java', 'java/java-original'], ['Python', 'python/python-original'], ['C#', 'csharp/csharp-original'], ['SQL', 'azuresqldatabase/azuresqldatabase-original']] },
   { name: { es: 'Frontend', en: 'Frontend' }, items: [['Angular', 'angularjs/angularjs-original'], ['HTML', 'html5/html5-original'], ['CSS', 'css3/css3-original'], ['Bootstrap', 'bootstrap/bootstrap-original']] },
@@ -811,7 +843,7 @@ class Component extends DCLogic {
     
     this._onPlayResize = () => { clearTimeout(this._prT); this._prT = setTimeout(() => { const e = this._eng; if (e && this.playRef.current && Math.abs(this.playRef.current.clientWidth - e.W) > 4) { this.destroyPlay(); this.initPlay(); } }, 250); };
     window.addEventListener('resize', this._onPlayResize);
-    this._onWide = () => { const w = window.innerWidth > 1100; if (w !== this.state.wide) this.setState({ wide: w }); };
+    this._onWide = () => { const w = window.innerWidth > 1100, st = window.innerWidth <= 980; if (w !== this.state.wide || st !== this.state.stacked) this.setState({ wide: w, stacked: st }); };
     this._onWide();
     window.addEventListener('resize', this._onWide);
     this._wideT = setInterval(this._onWide, 1000);
@@ -1008,6 +1040,7 @@ class Component extends DCLogic {
     }
     if (ps.modal !== s.modal || ps.menu !== s.menu) document.body.style.overflow = (s.modal !== null && s.modal !== undefined) || s.menu ? 'hidden' : '';
     if (ps.mobile !== s.mobile && s.pinned) this.killPin();
+    if (this._skView) this._skView();
   }
 
   tick() {
@@ -1057,6 +1090,16 @@ class Component extends DCLogic {
   setupNav() {
     const nav = this.navRef.current, bar = this.barRef.current;
     if (!nav) return;
+    const sk = document.getElementById('habilidades');
+    const skView = () => {
+      const panel = this.rootRef.current && this.rootRef.current.querySelector('[data-sk-sheet]');
+      if (!sk || !panel) return;
+      const r = sk.getBoundingClientRect(), on = r.top < window.innerHeight * 0.6 && r.bottom > window.innerHeight * 0.4;
+      if (panel.dataset.inview !== String(on)) panel.dataset.inview = String(on);
+    };
+    this._skView = skView;
+    window.addEventListener('scroll', skView, { passive: true });
+    skView();
     let last = window.scrollY, hidden = false, raf = null;
     const upd = () => {
       raf = null;
@@ -1334,7 +1377,7 @@ class Component extends DCLogic {
       stC: p.internal || p.soon ? '#6e6e73' : '#0066cc', stBg: p.internal || p.soon ? '#f5f5f7' : 'rgba(0,113,227,.1)',
       tagLine: p.tags.filter(x => x !== 'GitHub').join(' · '),
       op: !sel || p.tags.includes(sel) ? 1 : 0.3,
-      pos: mobile ? 'sticky' : 'relative', top: mobile ? (72 + i * 14) + 'px' : 'auto', z: String(10 + i), mb: mobile ? '22px' : '0',
+      pos: 'relative', top: 'auto', z: String(10 + i), mb: '0',
       open: () => this.setState({ modal: i })
     }));
 
@@ -1352,7 +1395,7 @@ class Component extends DCLogic {
         return { name, onClick: setSel(name), hasIcon: !!icon, noIcon: !icon, icon: icon ? ICON(icon) : '', mono: mono || '',
           count: String(count), countC: on ? '#fff' : '#86868b',
           bg: on ? '#0071e3' : '#1d1d1f', fg: '#f5f5f7', bd: on ? '#0071e3' : '#1d1d1f',
-          filter: name === 'GitHub' ? 'invert(1)' : 'none' };
+          filter: DARK_ICONS.includes(name) ? 'brightness(0) invert(1)' : 'none' };
       })
     }));
 
@@ -1361,7 +1404,7 @@ class Component extends DCLogic {
       const on = sel === name, h = setSel(name);
       return { i: String(i), name, hasIcon: !!icon, noIcon: !icon, icon: icon ? ICON(icon) : '', mono: mono || '',
         count: String(places(name).length), countC: on ? '#fff' : '#86868b', bg: on ? '#0071e3' : '#3a3a3c',
-        sh: on ? '0 14px 30px -12px rgba(0,113,227,.7)' : '0 10px 24px -14px rgba(0,0,0,.8)', filter: name === 'GitHub' ? 'invert(1)' : 'none',
+        sh: on ? '0 14px 30px -12px rgba(0,113,227,.7)' : '0 10px 24px -14px rgba(0,0,0,.8)', filter: DARK_ICONS.includes(name) ? 'brightness(0) invert(1)' : 'none',
         tap: () => { const e = this._eng; if (e && e.bodies[i]) { e.M.Body.setVelocity(e.bodies[i], { x: (Math.random() - .5) * 4, y: -12 }); e.M.Body.setAngularVelocity(e.bodies[i], (Math.random() - .5) * .3); } h(); },
         onClick: (ev) => { if (ev && ev.detail === 0) { const e = this._eng; if (e && e.bodies[i]) e.M.Body.setVelocity(e.bodies[i], { x: 0, y: -12 }); h(ev); } } };
     });
@@ -1469,11 +1512,11 @@ class Component extends DCLogic {
         { label: t.edu, period: pick(EXP[2].period), company: EXP[2].company, role: pick(EXP[2].place) }],
       marquee: marqueeBase.concat(marqueeBase),
       tabs, tabNow: { lang: tab.lang, count: String(raw.length) }, codeLines,
-      exp, sel: sel || '', hasSel: !!sel, noSel: !sel, clearSkill: () => this.setState({ sel: null }),
+      exp, sel: sel || '', hasSel: !!sel, selVis: sel ? 'visible' : 'hidden', selHidden: String(!sel), selTab: sel ? '0' : '-1', skPanelSel: !!sel && !this.state.stacked, skPanelHint: !sel || this.state.stacked, skSheet: !!sel && !!this.state.stacked, noSel: !sel, clearSkill: () => this.setState({ sel: null }),
       skills, selPlaces: sel ? places(sel) : [],
       projects, projTotal: String(PROJ.length).padStart(2, '0'), projNow: String(this.state.projIdx + 1).padStart(2, '0'),
-      showArrows: !mobile,
-      tr: mobile ? { display: 'block', ox: 'visible', snap: 'none', maxw: '640px' } : { display: 'flex', ox: 'auto', snap: 'x mandatory', maxw: 'none' },
+      showArrows: true,
+      tr: { display: 'flex', ox: 'auto', snap: 'x mandatory', maxw: 'none' },
       onTrackScroll: (e) => {
         if (this.state.pinned) return;
         const tr = e.currentTarget, card = tr.querySelector('[data-card]');
