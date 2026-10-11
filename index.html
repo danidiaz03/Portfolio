@@ -596,7 +596,7 @@ const T = {
     capKicker: 'Full stack de verdad', capH: 'Trabajo en todas las capas de una aplicación.', capWhere: 'Usado en',
     lead: 'Trabajo con PHP, Symfony, Angular, .NET, Java y Python, y administro los servidores Linux donde se despliegan las aplicaciones.',
     ctaExp: 'Ver mi experiencia', ctaMail: 'Escríbeme', mail: 'Escríbeme',
-    tNow: 'Ahora mismo', tActive: 'En activo', tNowRole: 'Desarrollador web', since: 'desde 2025', seeExp: 'Ver qué hago allí',
+    tNow: 'Ahora mismo', tActive: 'En activo', tNowRole: 'Desarrollador web', since: 'desde marzo de 2025', seeExp: 'Ver qué hago allí',
     focus: ['PHP y Symfony', 'PrestaShop', 'Angular', 'Servidores Linux', 'Cloudflare'],
     tClock: 'En Madrid son las', tMode: 'remoto o híbrido',
     tStack: 'Mi día a día', stackLine: 'Del código al servidor, sin cambiar de persona.',
@@ -631,7 +631,7 @@ const T = {
     capKicker: 'Full stack, for real', capH: 'I work across every layer of an application.', capWhere: 'Used in',
     lead: 'I work with PHP, Symfony, Angular, .NET, Java and Python, and I manage the Linux servers where the applications are deployed.',
     ctaExp: 'See my experience', ctaMail: 'Write to me', mail: 'Write to me',
-    tNow: 'Right now', tActive: 'Active', tNowRole: 'Web developer', since: 'since 2025', seeExp: 'See what I do there',
+    tNow: 'Right now', tActive: 'Active', tNowRole: 'Web developer', since: 'since March 2025', seeExp: 'See what I do there',
     focus: ['PHP and Symfony', 'PrestaShop', 'Angular', 'Linux servers', 'Cloudflare'],
     tClock: 'In Madrid it’s', tMode: 'remote or hybrid',
     tStack: 'My day to day', stackLine: 'From code to server, same person.',
@@ -660,7 +660,7 @@ const T = {
 };
 
 const EXP = [
-  { id: 'des', kind: 'work', current: true, period: { es: '2025 — hoy', en: '2025 — now' },
+  { id: 'des', kind: 'work', current: true, period: { es: 'mar 2025 — hoy', en: 'Mar 2025 — now' },
     company: 'David Escudero Digital Studio', role: { es: 'Desarrollador web', en: 'Web developer' }, place: { es: 'Madrid', en: 'Madrid' },
     summary: { es: '', en: '' },
     bullets: {
@@ -681,7 +681,7 @@ const EXP = [
            'Responsive front-end work, on-page SEO, Google Merchant feeds, Ads campaigns and GA4 measurement.',
            'Agile teamwork with Jira and Confluence.'] },
     tags: ['PHP', 'PrestaShop', 'Symfony', 'Angular', 'WordPress', 'MySQL', 'Linux', 'Nginx', 'PHP-FPM', 'ISPConfig', 'Cloudflare', 'JavaScript', 'HTML', 'CSS', 'Git', 'Jira', 'Confluence'] },
-  { id: 'mcd', kind: 'work', period: { es: '2022 — 2025', en: '2022 — 2025' },
+  { id: 'mcd', kind: 'work', period: { es: 'oct 2022 — nov 2025', en: 'Oct 2022 — Nov 2025' },
     company: 'McDonald’s', role: { es: 'Encargado de turno · herramientas internas', en: 'Shift manager · internal tools' }, place: { es: 'Madrid', en: 'Madrid' },
     summary: { es: '', en: '' },
     bullets: {
@@ -694,7 +694,7 @@ const EXP = [
            'Python automation that removed over 10 hours of manual work per week.',
            'Internal tools used by more than 500 employees.'] },
     tags: ['Java', 'Python', 'SQL'] },
-  { id: 'daw', kind: 'edu', period: { es: '2023 — 2025', en: '2023 — 2025' },
+  { id: 'daw', kind: 'edu', period: { es: 'sep 2023 — jun 2025', en: 'Sep 2023 — Jun 2025' },
     company: 'Grado Superior DAW', role: { es: 'Desarrollo de Aplicaciones Web', en: 'Higher Diploma in Web Application Development' }, place: { es: 'Salesianas Plaza Castilla, Madrid', en: 'Salesianas Plaza Castilla, Madrid' },
     summary: { es: '', en: '' },
     bullets: {
@@ -986,7 +986,7 @@ class Component extends DCLogic {
     const pad = (s, n) => { s = String(s); return s.length >= n ? s + ' ' : s + ' '.repeat(n - s.length); };
     switch (this.termAlias(raw)) {
       case 'whoami': return [['Daniel Díaz', W], [es ? 'Desarrollador full stack, Madrid' : 'Full stack developer, Madrid', G], [(es ? 'Ahora:     ' : 'Now:       ') + 'David Escudero Digital Studio', G], [(es ? 'Formación: ' : 'Education: ') + (es ? 'Grado Superior DAW' : 'Higher Diploma, Web Dev'), G], [(es ? 'Idiomas:   español, inglés' : 'Languages: Spanish, English'), G]];
-      case 'exp': return EXP.reduce((a, e) => a.concat([[pad(pick(e.period), 14) + pick(e.company), W], ['              ' + pick(e.role), D]]), []);
+      case 'exp': return EXP.reduce((a, e) => a.concat([[pad(pick(e.period), 21) + pick(e.company), W], [' '.repeat(21) + pick(e.role), D]]), []);
       case 'stack': return CAPS.map(c => [pad(pick(c.title), 16) + c.techs.join(', '), G]);
       case 'proj': return PROJ.map(p => [pad(pick(p.title), 22) + p.tags.filter(x => x !== 'GitHub').join(', '), G]).concat([[es ? 'Más detalles en la sección Proyectos.' : 'More details in the Projects section.', D]]);
       case 'contact': return [['email     danieldiazq2003@gmail.com', G], ['linkedin  linkedin.com/in/danieldiazq', G], ['github    github.com/danidiaz03', G]];
@@ -1449,7 +1449,7 @@ class Component extends DCLogic {
         : { pad: '0px', name: 'clamp(2.6rem,12vw,7.6rem)', sub: 'clamp(1.55rem,5.2vw,4.1rem)' },
       playRef: this.playRef, playOn, listOn: !playOn, playChips, skModes, playActions,
       tenure: (() => {
-        const now = new Date(), m = Math.max(1, (now.getFullYear() - 2025) * 12 + now.getMonth() - 0 + 1);
+        const now = new Date(), m = Math.max(1, (now.getFullYear() - 2025) * 12 + now.getMonth() - 2 + 1);
         const y = Math.floor(m / 12), r = m % 12, en = L === 'en';
         const yy = y ? y + (en ? (y > 1 ? ' years' : ' year') : (y > 1 ? ' años' : ' año')) : '';
         const mm = r ? r + (en ? (r > 1 ? ' months' : ' month') : (r > 1 ? ' meses' : ' mes')) : '';
