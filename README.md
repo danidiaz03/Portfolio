@@ -2,47 +2,52 @@
 
 Portfolio personal de **Daniel Díaz**, desarrollador Full Stack (Madrid).
 
-Sitio estático de una sola página, con estética editorial, construido con
-**HTML, CSS y JavaScript** puro (sin frameworks ni build). Bilingüe ES/EN.
+Sitio estático de una sola página, con estética limpia estilo Apple, sin build.
+Bilingüe ES/EN. El diseño viene de Claude Design y se renderiza con su runtime
+(`dc-runtime` + React), todo servido en local.
 
 ## Características
 
-- Diseño editorial responsive (crema / azul / tinta, tipografías Syne + Space Grotesk).
-- Cambio de idioma **ES / EN** con preferencia guardada en `localStorage`.
-- Animaciones con GSAP + ScrollTrigger como mejora progresiva: reveals al hacer
-  scroll, hero reactivo al cursor, frase que se teclea sola, scroll horizontal
-  fijado en proyectos, contadores, tilt de tarjetas, botones magnéticos y cursor propio.
-- Accesible: respeta `prefers-reduced-motion` y el contenido es legible sin JavaScript.
+- Hero con nombre animado, frase rotatoria y piezas 3D de tecnologías que se
+  pueden arrastrar y girar.
+- Bento con terminal interactiva (`whoami`, `experiencia`, `stack`…), reloj de
+  Madrid, stack diario y formación.
+- Capacidades por capa con panel fijo, sección "Más allá del código" con lectura
+  palabra a palabra, experiencia filtrable por tecnología y habilidades enlazadas.
+- Proyectos en carril horizontal fijado al scroll (GSAP + ScrollTrigger) con modal.
+- Cambio de idioma **ES / EN** guardado en `localStorage` (`ddq-lang`).
+- Respeta `prefers-reduced-motion`; sin JavaScript se muestra un resumen básico.
 
 ## Estructura
 
 ```
 .
-├── index.html              # marcado de todas las secciones
+├── index.html               # head (SEO, GA4) + plantilla y lógica del diseño
 ├── assets/
-│   ├── css/
-│   │   ├── base.css         # design tokens, reset y tipografía
-│   │   ├── layout.css       # nav, hero, secciones y footer
-│   │   └── components.css   # botones, tarjetas, modal, marquee, mosaicos…
-│   └── js/
-│       ├── config.js        # diccionario de traducción ES/EN
-│       ├── ui.js            # reloj, menú móvil, volver arriba, typewriter
-│       ├── i18n.js          # cambio de idioma
-│       ├── projects.js      # modal de proyecto
-│       ├── animations.js    # animaciones con GSAP
-│       └── main.js          # punto de entrada
+│   ├── vendor/              # dc-runtime, React, ReactDOM, GSAP, ScrollTrigger, Matter.js
+│   ├── icons/               # iconos de tecnologías (devicon) en SVG
+│   ├── css/consent.css      # banner de cookies
+│   ├── js/consent.js        # lógica del banner (Consent Mode v2)
+│   └── og-image.png
 ├── README.md
 └── LICENSE
 ```
 
+Los textos (ES/EN) están en la constante `T`, la experiencia en `EXP`, los
+proyectos en `PROJ` y las habilidades en `SKILLS`, dentro del `<script type="text/x-dc">`
+de [index.html](index.html). `window.__resources` (en el `<head>`) mapea cada
+librería e icono a su fichero local.
+
 ## Proyectos
 
-| Proyecto | Stack | Enlaces |
-|----------|-------|---------|
-| Clínica Veterinaria | .NET · C# · SQLite | [repo](https://github.com/danidiaz03/Clinica-veterinaria) · [sitio](https://clinicaveterinaria.danieldiaz.es) |
-| ScanPass | Angular · Symfony · API REST | [repo](https://github.com/danidiaz03/Scanpass) |
-| FinanceFlow | Angular · Symfony · MySQL | [repo](https://github.com/danidiaz03/financeflow) |
-| Dapokedex | Angular · Firebase · PokéAPI | [repo](https://github.com/danidiaz03/Dapokedex) |
+| Proyecto | Stack | Estado |
+|----------|-------|--------|
+| Clínica Veterinaria | C# · ASP.NET · SQLite | [repo](https://github.com/danidiaz03/Clinica-veterinaria) · [sitio](https://clinicaveterinaria.danieldiaz.es) |
+| Dapokedex | Angular · Firebase · PokéAPI | [repo](https://github.com/danidiaz03/Dapokedex) · [sitio](https://dapokedex.danieldiaz.es) |
+| ScanPass | Angular · Symfony · API REST | Próximamente |
+| FinanceFlow | Angular · Symfony · MySQL | Próximamente |
+| Análisis de precios | Java · SQL | Interno |
+| Automatización de tareas | Python | Interno |
 
 ## Analítica
 
@@ -52,19 +57,13 @@ El Measurement ID se configura en el `<head>` de [index.html](index.html).
 
 ## Estado de los proyectos
 
-Cada tarjeta de la sección Proyectos ([index.html](index.html)) tiene un estado:
+Cada entrada de `PROJ` admite:
 
-- **Publicado**: sin badge. Enlaces vía atributos `data-site`, `data-repo`
-  y/o `data-post` (enlace al post/caso detallado del proyecto).
-- **Próximamente**: atributo `data-soon` (badge "Próximamente").
-- **Próximamente con fecha**: además `data-countdown="YYYY-MM-DDTHH:MM:SS+02:00"`
-  muestra una **cuenta atrás** en la tarjeta, y `data-date="…"` la fecha legible
-  en el modal.
+- **Publicado**: `repo` y/o `site` → badge "Repo público" y botones en el modal.
+- **Próximamente**: `soon: true` → badge "Próximamente", sin enlaces.
+- **Interno**: `internal: true` → badge "Interno" y nota de herramienta interna.
 
-Para publicar un proyecto (p. ej. Dapokedex): quita `data-soon`, `data-countdown`
-y `data-date` de su `<a class="card">` y rellena `data-post` con el enlace al
-post del proyecto (y `data-site`/`data-repo` si aplica). El modal mostrará los
-botones automáticamente.
+Para publicar un proyecto, quita `soon: true` y añade `repo`/`site`.
 
 ## Desarrollo local
 
@@ -75,8 +74,8 @@ python3 -m http.server 8080
 # abre http://localhost:8080
 ```
 
-> Se usa un servidor (en lugar de abrir el archivo directamente) porque el JS
-> se carga como módulos ES.
+> Se usa un servidor (en lugar de abrir el archivo directamente) para que las
+> librerías e iconos de `assets/` se carguen correctamente.
 
 ## Contacto
 
